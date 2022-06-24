@@ -1472,14 +1472,16 @@ Ketcindyjsscale=1;
 <script id="csdraw" type="text/x-cindyscript">
 Ketinit();
 
+
 Setwindow([-1.2,1.2],[-1.2,1.2]);
 Setax(["l","x","e2","y","n3"," ","","Size=1.5"]);
 
 Defvar("xs",1.6);
 cor1=[xs,1];
-cor2=cor1+[0,-0.5];
-cor3=[xs,-0.3];
-cor4=cor3+[0,-0.5];
+cor2=cor1+[0,-0.3];
+cor3=cor2+[0,-0.4];
+cor4=[xs,-0.3];
+cor5=cor4+[0,-0.3];
 ops=["Size=1.5"];
 
 mf(s):=(
@@ -1499,12 +1501,13 @@ mf(s):=(
     Letter([cos(s),sin(s)],"w2","P");
     Expr([cor1,"e","x=2\cos "+format(s0,2)+"="+format(2*cos(s0),3)],ops);
     Expr([cor2,"e","y=\, 2\sin "+format(s0,2)+"="+format(2*sin(s0),3)],ops);
-    Expr([cor3,"e","t="+format(s0,2)],ops);
-    Expr(cor4,"e","\mathrm{P}("+format(2*cos(s0),3)+",\ "+format(2*sin(s),3)+")",ops);
+    Expr([cor4,"e","t="+format(s0,2)],ops);
+    Expr([cor5,"e","\mathrm{P}("+format(2*cos(s0),3)+",\ "+format(2*sin(s),3)+")"],ops);
   );
 );
-Expr([[1,0],"se1","2",ops]);
-Expr([[0,1],"n1w","2",ops]);
+Expr([[1,0],"se1","2"],ops);
+Expr([[0,1],"n1w","2"],ops);
+Expr([cor3,"e","0\leq t\leq 2\pi"],ops);
 
 Setpara("para1","mf(s)","s=[-1.2,2.4]",["Div=25"],
  ["Frate=10","Scale=1","OpA=","Title=para1"]);
@@ -1533,16 +1536,16 @@ var cdy = CindyJS({
   geometry: [
     {name: "SW", type: "Free", pos: [4.0, 4.0, -3.3333333333333335], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
     {name: "NE", type: "Free", pos: [4.0, 4.0, 3.3333333333333335], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
-    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 24.0]}},
-    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 24.0]}},
-    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 24.0]}},
-    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 24.0]}}
+    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 22.0]}},
+    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 22.0]}},
+    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 22.0]}},
+    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 22.0]}}
   ],
   ports: [{
     id: "CSCanvas",
     width: 982,
-    height: 404,
-    transform: [{visibleRect: [-3.7193156059998183, 1.6811842201901872, 4.413134657424552, -1.664548882074014]}],
+    height: 402,
+    transform: [{visibleRect: [-3.714260634568055, 1.6770073099220315, 4.418189628856315, -1.652162757182446]}],
     grid: 0.5,
     background: "rgb(247,247,247)"
   }],

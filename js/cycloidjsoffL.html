@@ -1512,8 +1512,8 @@ Ketcindyjsscale=1;
 <script id="csdraw" type="text/x-cindyscript">
 Ketinit();
 
-Cor="Color=red";
 Circledata("1",[[0,1],[1,1]],["Msg=n"]);
+Cor="Color=red";
 
 mf(s0):=(
   regional(s,fun,rng);
@@ -1553,16 +1553,16 @@ var cdy = CindyJS({
   geometry: [
     {name: "SW", type: "Free", pos: [4.0, 2.067415730337189, -1.9560593259385612], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
     {name: "NE", type: "Free", pos: [4.0, 1.5, 0.5], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
-    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 39.0]}},
-    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 39.0]}},
-    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 39.0]}},
-    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 39.0]}}
+    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 22.0]}},
+    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 22.0]}},
+    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 22.0]}},
+    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 22.0]}}
   ],
   ports: [{
     id: "CSCanvas",
-    width: 754,
-    height: 439,
-    transform: [{visibleRect: [-2.5647051032340125, 4.891078552320957, 10.141059888959184, -2.5065750704546566]}],
+    width: 905,
+    height: 422,
+    transform: [{visibleRect: [-3.2812497976446426, 4.0951620696272215, 9.518881618893754, -1.8735179942172024]}],
     grid: 1.0,
     snap: true,
     background: "rgb(247,247,247)"

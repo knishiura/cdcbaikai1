@@ -223,6 +223,26 @@ Strictmove(pCorg,sep):=(
     );
   );
 );
+Addpackage(packorg):=(
+  regional(packL,tmp);
+  packL=packorg; //17.06.25from
+  if(!islist(packL),packL=[packL]);
+  packL=apply(packL,replace(#,"\","/"));
+  forall(1..(length(packL)),
+    tmp=packL_#;
+    if(substring(tmp,0,11)=="ketpicstyle",
+      tmp=replace(Dirhead+"/"+tmp,"\","/");
+    );
+    if(indexof(tmp,"[")==0,
+      packL_#="{"+tmp+"}";
+    );
+  );
+  forall(packL, //20070717from
+    if(!contains(ADDPACK,#),
+      ADDPACK=append(ADDPACK,#); 
+    );
+  ); //200717to
+);
 Setax(arglistorg):=(
   regional(arglist,st,nn,tmp,eqL); 
   tmp=Divoptions(arglistorg); //190901from
@@ -1471,15 +1491,17 @@ Ketcindyjsscale=1;
 </script>
 <script id="csdraw" type="text/x-cindyscript">
 Ketinit();
+Addpackage("emath");
 
-Setwindow([-4.2,4.2],[-2.2,2.2]);
+Setwindow([-3.5,3.5],[-3.5,3.5]);
 Setax(["l","x","e2","y","n3"," ","","Size=1.5"]);
 
-Defvar("xs",3.5);
-cor1=[xs,1];
-cor2=cor1+[0,-0.5];
-cor3=[xs,-0.3];
-cor4=cor3+[0,-0.5];
+Defvar("xs",4);
+cor1=[xs,2];
+cor2=cor1+[0,-0.7];
+cor3=cor2+[0,-0.7];
+cor4=[xs,-0.3];
+cor5=cor4+[0,-0.7];
 ops=["Size=1.5"];
 
 mf(s):=(
@@ -1488,23 +1510,26 @@ mf(s):=(
   rng=Assign("t=[0,s]",["s",s]);
   rng2=Assign("Rng=[0,s]",["s",s]);
   Paramplot("1","[3*cos(t),2*sin(t)]",rng,["Msg=n"]);
-  Listplot("1",[[0,0],[3*cos(s),2*sin(s)]],[,"do","Msg=n"]);
+  Paramplot("2","[3*cos(t),3*sin(t)]",rng,["do","Msg=n"]);
+  Listplot("2",[[0,0],[3*cos(s),3*sin(s)]],["do","Msg=n"]);
+  Listplot("3",[[3*cos(s),0],[3*cos(s),3*sin(s)]],["do","Msg=n"]);
   if((s==0)%(s==2*pi),
      Expr([cor1,"e","x=3\cos t"],ops);
-     Expr([cor2,"e","y=\, 2\sin t"],ops);
+     Expr([cor2,"e","y=2\, \sin t"],ops);
   );
   if((s>0)&(s<2*pi),
     Pointdata("1",[3*cos(s),2*sin(s)],ops);
-    Paramplot("2","[0.2*cos(t),0.2*sin(t)]",rng,["Msg=n"]);
+    Paramplot("3","[0.4*cos(t),0.4*sin(t)]",rng,["Msg=n"]);
     Letter([3*cos(s),2*sin(s)],"w2","P");
     Expr([cor1,"e","x=3\cos "+format(s0,2)+"="+format(3*cos(s0),3)],ops);
-    Expr([cor2,"e","y=\, 2\sin "+format(s0,2)+"="+format(2*sin(s0),3)],ops);
-    Expr([cor3,"e","t="+format(s0,2)],ops);
-    Expr(cor4,"e","\mathrm{P}("+format(3*cos(s0),3)+",\ "+format(2*sin(s),3)+")",ops);
+    Expr([cor2,"e","y=2\, \sin "+format(s0,2)+"="+format(2*sin(s0),3)],ops);
+    Expr([cor4,"e","t="+format(s0,2)],ops);
+    Expr(cor5,"e","\mathrm{P}("+format(3*cos(s0),3)+",\ "+format(2*sin(s),3)+")",ops);
   );
 );
-Expr([[3,0],"se1","3",ops]);
-Expr([[0,2],"n1w","2",ops]);
+Expr([[3,0],"se1","3"],ops);
+Expr([[0,2],"n1w","2",[0,3],"n1w","3"],ops);
+Expr([cor3,"e","0\leq t\leq 2\pi"],ops);
 
 Setpara("para1","mf(s)","s=[0,2*pi]",["Div=25"],
  ["Frate=10","Scale=1","OpA=","Title=para1"]);
@@ -1531,18 +1556,18 @@ var cdy = CindyJS({
   },
   angleUnit: "°",
   geometry: [
-    {name: "SW", type: "Free", pos: [4.0, 2.095238095238096, -0.9523809523809524], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
-    {name: "NE", type: "Free", pos: [4.0, 2.095238095238096, 0.9523809523809524], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
-    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 28.0]}},
-    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 28.0]}},
-    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 28.0]}},
-    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 28.0]}}
+    {name: "SW", type: "Free", pos: [4.0, 4.0, -1.1428571428571428], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
+    {name: "NE", type: "Free", pos: [4.0, 4.0, 1.1428571428571428], color: [1.0,1.0,1.0], labeled: false, size: 2.0, border:false },
+    {name: "Text71", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, pinned: true, script: "resetclock();\nplayanimation();\nAnimeflg=1;\nDirflg=1;\nsorg=Current;\n", text: "Play", textsize: 18.0, dock: {corner: "LL", offset: [310.0, 31.0]}},
+    {name: "Text72", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "stopanimation();\nAnimeflg=\"\";\nsstart=Current;\n", text: "Stop", textsize: 18.0, dock: {corner: "LL", offset: [508.0, 31.0]}},
+    {name: "Text73", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "Animeflg=1-Animeflg;\nif(Animeflg==0,\n  pauseanimation();\n  sorg=sstart;\n,\n  resetclock();\n  playanimation();\n);", text: "Pause", textsize: 18.0, dock: {corner: "LL", offset: [373.0, 31.0]}},
+    {name: "Text74", type: "Button", color: [0.0, 0.0, 0.0], fillcolor: [1.0, 0.737, 0.467], fillalpha: 0.27272728085517883, script: "sorg=sstart;\nDirflg=-Dirflg;\nAnimeflg=1;\nresetclock();\nplayanimation();", text: "Rev", textsize: 18.0, dock: {corner: "LL", offset: [448.0, 31.0]}}
   ],
   ports: [{
     id: "CSCanvas",
     width: 982,
-    height: 368,
-    transform: [{visibleRect: [-8.161566119529455, 3.0119791498679223, 8.381536485806926, -3.1874727429668925]}],
+    height: 411,
+    transform: [{visibleRect: [-11.502221209836856, 4.68780107599322, 11.781744510423207, -5.057321032995462]}],
     grid: 1.0,
     background: "rgb(247,247,247)"
   }],
